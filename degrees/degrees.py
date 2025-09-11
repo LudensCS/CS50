@@ -103,7 +103,7 @@ def shortest_path(source, target):
         if u == target:
             break
         for e in neighbors_for_person(u):
-            if e[1]!=nd.parent and e[1] != u and (e[1] not in path):
+            if e[1] != nd.parent and e[1] != u and (e[1] not in path):
                 q.add(Node(e[1], u, e[0]))
                 path[e[1]] = (u, e[0])
     ed = target
