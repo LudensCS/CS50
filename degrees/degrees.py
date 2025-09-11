@@ -99,24 +99,25 @@ def shortest_path(source, target):
     q = QueueFrontier()
     q.add(Node(source, None, 0))
     path = {source: (0, 0)}
+    founded = False
     while not q.empty():
         nd = q.remove()
         u = nd.state
         if u == target:
+            founded = True
             break
         for e in neighbors_for_person(u):
             if e[1] not in path:
                 q.add(Node(e[1], u, e[0]))
                 path[e[1]] = (u, e[0])
+    if not founded:
+        return None
     ed = target
     while ed != source:
         ans.append(((path[ed][1]), ed))
         ed = (path[ed])[0]
     ans.reverse()
-    if len(ans) == 0:
-        return None
-    else:
-        return ans
+    return ans
     # raise NotImplementedError
 
 
