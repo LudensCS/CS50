@@ -95,27 +95,27 @@ def shortest_path(source, target):
     # TODO
     ans = []
     q = QueueFrontier()
-    q.add(Node(source,0,0))
-    path = {source:(0,0)}
+    q.add(Node(source, 0, 0))
+    path = {source: (0, 0)}
     while not q.empty():
         nd = q.remove()
-        u=nd.state
-        if u==target:
+        u = nd.state
+        if u == target:
             break
         for e in neighbors_for_person(u):
-            if e[1]!=nd.parent and e[1]!=u and (e[1] not in path):
-                q.add(Node(e[1],u,e[0]))
-                path[e[1]]=(u,e[0])
+            if e[1]!=nd.parent and e[1] != u and (e[1] not in path):
+                q.add(Node(e[1], u, e[0]))
+                path[e[1]] = (u, e[0])
     ed = target
     while ed != source:
-        ans.append(((path[ed][1]),ed))
+        ans.append(((path[ed][1]), ed))
         ed = (path[ed])[0]
     ans.reverse()
     if len(ans) == 0:
         return None
     else:
         return ans
-    #raise NotImplementedError
+    # raise NotImplementedError
 
 
 def person_id_for_name(name):
