@@ -50,7 +50,6 @@ lost = False
 instructions = True
 
 while True:
-
     # Check if game quit
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -60,7 +59,6 @@ while True:
 
     # Show game instructions
     if instructions:
-
         # Title
         title = largeFont.render("Play Minesweeper", True, WHITE)
         titleRect = title.get_rect()
@@ -71,7 +69,7 @@ while True:
         rules = [
             "Click a cell to reveal it.",
             "Right-click a cell to mark it as a mine.",
-            "Mark all mines successfully to win!"
+            "Mark all mines successfully to win!",
         ]
         for i, rule in enumerate(rules):
             line = smallFont.render(rule, True, WHITE)
@@ -103,12 +101,12 @@ while True:
     for i in range(HEIGHT):
         row = []
         for j in range(WIDTH):
-
             # Draw rectangle for cell
             rect = pygame.Rect(
                 board_origin[0] + j * cell_size,
                 board_origin[1] + i * cell_size,
-                cell_size, cell_size
+                cell_size,
+                cell_size,
             )
             pygame.draw.rect(screen, GRAY, rect)
             pygame.draw.rect(screen, WHITE, rect, 3)
@@ -120,8 +118,7 @@ while True:
                 screen.blit(flag, rect)
             elif (i, j) in revealed:
                 neighbors = smallFont.render(
-                    str(game.nearby_mines((i, j))),
-                    True, BLACK
+                    str(game.nearby_mines((i, j))), True, BLACK
                 )
                 neighborsTextRect = neighbors.get_rect()
                 neighborsTextRect.center = rect.center
@@ -132,8 +129,10 @@ while True:
 
     # AI Move button
     aiButton = pygame.Rect(
-        (2 / 3) * width + BOARD_PADDING, (1 / 3) * height - 50,
-        (width / 3) - BOARD_PADDING * 2, 50
+        (2 / 3) * width + BOARD_PADDING,
+        (1 / 3) * height - 50,
+        (width / 3) - BOARD_PADDING * 2,
+        50,
     )
     buttonText = mediumFont.render("AI Move", True, BLACK)
     buttonRect = buttonText.get_rect()
@@ -143,8 +142,10 @@ while True:
 
     # Reset button
     resetButton = pygame.Rect(
-        (2 / 3) * width + BOARD_PADDING, (1 / 3) * height + 20,
-        (width / 3) - BOARD_PADDING * 2, 50
+        (2 / 3) * width + BOARD_PADDING,
+        (1 / 3) * height + 20,
+        (width / 3) - BOARD_PADDING * 2,
+        50,
     )
     buttonText = mediumFont.render("Reset", True, BLACK)
     buttonRect = buttonText.get_rect()
@@ -205,9 +206,11 @@ while True:
         elif not lost:
             for i in range(HEIGHT):
                 for j in range(WIDTH):
-                    if (cells[i][j].collidepoint(mouse)
-                            and (i, j) not in flags
-                            and (i, j) not in revealed):
+                    if (
+                        cells[i][j].collidepoint(mouse)
+                        and (i, j) not in flags
+                        and (i, j) not in revealed
+                    ):
                         move = (i, j)
 
     # Make move and update AI knowledge
